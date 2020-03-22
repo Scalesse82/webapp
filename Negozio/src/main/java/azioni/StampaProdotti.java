@@ -14,31 +14,35 @@ import models.Prodotto;
 
 public class StampaProdotti extends HttpServlet
 {
-	
-	
-	
+
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		try {
-			List<Prodotto> lista=GestioneDataBase.stampaProdotti();
+		
+			List<Prodotto> lista;
+			try {
+				lista = GestioneDataBase.stampaProdotti();
+				req.setAttribute("listaProdotti", lista);
+
+			} catch (ClassNotFoundException | SQLException e) {
+				e.printStackTrace();
+			}
 			
-			req.setAttribute("listaProdotti", lista);
 
 			
 			
 			
 			
 			
-		} catch (ClassNotFoundException | SQLException e) {
-			e.printStackTrace();
-		}
-
+		
 		
 		req.getRequestDispatcher("modProdotto.jsp").forward(req, resp);
 
 		
 	}
 	
-
+	
+	
+	
 }
