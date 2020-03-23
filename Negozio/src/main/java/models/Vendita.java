@@ -3,9 +3,9 @@ package models;
 public class Vendita 
 {
 	
-	int idVendita;
-	int idProdotti;
-	int qtaVenduta;
+	private int idVendita;
+	private int idProdotti;
+	private int qtaVenduta;
 	
 	
 	public Vendita(int idVendita, int idProdotti, int qtaVenduta) 

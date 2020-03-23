@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<form action="aggProdotto">
+<form action="aggProdotto" method="post">
   <label for="nomeProdotto">Inserisci il nome del prodotto:</label>
   <input type="text" id="nomeProdotto" name="nomeProdotto"><br><br>
   <label for="qta">Inserisci la quantita del prodotto</label>

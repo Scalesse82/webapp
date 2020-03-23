@@ -18,25 +18,35 @@ public class AggiuntaProdotto extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
+		req.setAttribute("messaggio", "hai provato a fare l'accesso all'aggiunta di un prodotto dalla get");
+		req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
+		
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+	
 		try {
-		
-		String nome=req.getParameter("nomeProdotto");
-		int qta=Integer.parseInt(req.getParameter("qta"));
-		int prezzo=Integer.parseInt(req.getParameter("prezzo"));
-		String descrizione=req.getParameter("descrizione");
-		
-		GestioneDataBase.aggiungiProdotto(new Prodotto(nome, qta, prezzo, descrizione));
-		
-		req.setAttribute("risultato", "prodotto aggiunto");
-		
-		req.getRequestDispatcher("risultato.jsp").forward(req, resp);
-		
-		} catch (ClassNotFoundException | SQLException  e) 
-        {
-			e.printStackTrace();
-		} 
-		
-		
+			
+			String nome=req.getParameter("nomeProdotto");
+			int qta=Integer.parseInt(req.getParameter("qta"));
+			int prezzo=Integer.parseInt(req.getParameter("prezzo"));
+			String descrizione=req.getParameter("descrizione");
+			
+			GestioneDataBase.aggiungiProdotto(new Prodotto(nome, qta, prezzo, descrizione));
+			
+			req.setAttribute("risultato", "prodotto aggiunto");
+			
+			req.getRequestDispatcher("risultato.jsp").forward(req, resp);
+			
+			} catch (ClassNotFoundException | SQLException  e) 
+	        {
+				e.printStackTrace();
+			} 
+	
+	
 	}
 	
 	

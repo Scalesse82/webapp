@@ -3,11 +3,11 @@ package models;
 public class Prodotto 
 {
 	
-	int idProdotto;
-	String nome;
-	int qta;
-	int prezzo;
-	String descrizione;
+	private int idProdotto;
+	private String nome;
+	private int qta;
+	private int prezzo;
+	private String descrizione;
 	
 	
 	

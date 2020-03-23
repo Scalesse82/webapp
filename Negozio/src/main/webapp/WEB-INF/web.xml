@@ -25,15 +25,7 @@
 		<url-pattern> /rimProdotto</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-		<servlet-name>stmProdotto</servlet-name>
-		<servlet-class>azioni.StampaProdotti</servlet-class>
-	</servlet>
 	
-	<servlet-mapping>
-		<servlet-name>stmProdotto</servlet-name>
-		<url-pattern> /stmProdotto</url-pattern>
-	</servlet-mapping>
 	
 	<servlet>
 		<servlet-name>modificaProdotto</servlet-name>
@@ -55,14 +47,15 @@
 		<url-pattern> /vendiProdotto</url-pattern>
 	</servlet-mapping>
 	
+	
 	<servlet>
-		<servlet-name>stampaProdottiVenduti</servlet-name>
-		<servlet-class>azioni.StampaVendite</servlet-class>
+		<servlet-name>controllerAzione</servlet-name>
+		<servlet-class>azioni.ControlloAzione</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>stampaProdottiVenduti</servlet-name>
-		<url-pattern> /stampaProdottiVenduti</url-pattern>
+		<servlet-name>controllerAzione</servlet-name>
+		<url-pattern> /controllerAzione</url-pattern>
 	</servlet-mapping>
 	
 

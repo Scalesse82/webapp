@@ -8,23 +8,28 @@
 </head>
 <body>
 
+<% String messaggio = (String) request.getAttribute("messaggio"); 
+	if (messaggio != null ){
+		%>
+		<h1>ERRORE</h1>
+		<%=messaggio%>
+					
+	<% }
+	else{
+
+
+%>
 <h1>SCEGLI L'AZIONE DA FARE</h1>
 
-<form action="aggiungiprodotto.jsp">
-<input type="submit" value = "Aggiungi prodotto">
+<form action="controllerAzione">
+<input type="submit" name="azione" value = "Aggiungi prodotto"><br><br>
+<input type="submit" name="azione" value = "rimuovi prodotto"><br><br>
+<input type="submit" name="azione" value = "modifica prodotto"><br><br>
+<input type="submit" name="azione" value = "vendita prodotto"><br><br>
+<input type="submit" name="azione" value = "Stampa vendite">
 </form>
-<form action="rimuoviProdotto.jsp">
-<input type="submit" value = "rimuovi prodotto">
-</form>
-<form action="stmProdotto">
-<input type="submit" value = "modifica prodotto">
-</form>
-<form action="vendita.jsp">
-<input type="submit" value = "vendita prodotto">
-</form>
-<form action="stampaProdottiVenduti">
-<input type="submit" value = "Stampa vendite">
-</form>
+<% } %>
+
 
 </body>
 </html>

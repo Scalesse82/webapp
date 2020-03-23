@@ -22,11 +22,53 @@ public class GestioneDataBase
 		return connessione;
 	}
 	
+	public static boolean controlloProdotto(Prodotto p) throws ClassNotFoundException, SQLException
+	{
+        Connection connessione = connessioneDatabase();
+		
+		String query = "select * from prodotti where nome=?;";
+		PreparedStatement statement = connessione.prepareStatement(query);
+		statement.setString(1, p.getNome());
+		ResultSet risultato=statement.executeQuery();
+		while(risultato.next())
+		{
+			connessione.close();
+			return true;
+			
+		}
+		
+		connessione.close();
+		return false;
+		
+		}
 	
 	
 	public static boolean aggiungiProdotto(Prodotto p) throws ClassNotFoundException, SQLException
-    {
+    {   int qtaVecchia=0;
 		Connection connessione = connessioneDatabase();
+		if(controlloProdotto(p))
+		{
+			String query = "select * from prodotti where nome=?;";
+			PreparedStatement statement = connessione.prepareStatement(query);
+			statement.setString(1, p.getNome());
+			ResultSet risultato=statement.executeQuery();
+			while(risultato.next())
+			{
+				qtaVecchia=risultato.getInt(3);
+				
+			}
+			String query2 = "update prodotti set qta=? where nome=?;";
+		    statement = connessione.prepareStatement(query2);
+			statement.setInt(1, (p.getQta()+qtaVecchia));
+			statement.setString(2, p.getNome());
+			statement.execute();
+			connessione.close();
+			return true;
+			
+			
+			
+		}
+		else {
 		String query = "INSERT INTO prodotti (nome,qta,prezzo,descrizione) VALUES (?,?,?,?);";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setString(1, p.getNome());
@@ -36,7 +78,7 @@ public class GestioneDataBase
 		statement.execute();
 		connessione.close();
 
-		return true;		
+		return true;}
 		
 	}
 	
@@ -104,16 +146,37 @@ public class GestioneDataBase
 	
 	public static boolean aggiungiVendita(Vendita v) throws ClassNotFoundException, SQLException
     {
+		int qtaVecchia=0;
 		Connection connessione = connessioneDatabase();
 		String query = "INSERT INTO vendite (idProdotto,qtaVenduta) VALUES (?,?);";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setInt(1, v.getIdProdotti());
 		statement.setInt(2, v.getQtaVenduta());
-		
 		statement.execute();
+		String query2 = "select * from prodotti where idProdotto=?;";
+		PreparedStatement statement2 = connessione.prepareStatement(query2);
+		statement2.setInt(1, v.getIdProdotti());
+		ResultSet risultato=statement2.executeQuery();
+		while(risultato.next())
+		{
+			qtaVecchia=risultato.getInt(3);
+			
+		}
+		if(qtaVecchia>v.getQtaVenduta())
+		{
+		String query3 = "update prodotti set qta=? where idProdotto=?;";
+		PreparedStatement statement3 = connessione.prepareStatement(query3);
+		statement3.setInt(1, (qtaVecchia-v.getQtaVenduta()));
+		statement3.setInt(2, v.getIdProdotti());
+
+		statement3.execute();
+		connessione.close();
+		return true;
+		}
+		
 		connessione.close();
 
-		return true;		
+		return false;		
 		
 	}
 	

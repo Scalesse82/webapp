@@ -45,7 +45,7 @@ table, th, td {
 	<% } %>
 </table>
 
-<form action="modificaProdotto">
+<form action="modificaProdotto" method="post">
 
   <label for="idProdotto">Inserisci l'id del prodotto</label>
   <input type="number" id="idProdotto" name="idProdotto"><br><br>
