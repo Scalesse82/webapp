@@ -54,13 +54,15 @@ public class ControlloAzione extends HttpServlet
 			List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();
 			req.setAttribute("listaProdotti", lista);
 			req.setAttribute("idUtente",id);
-			req.getRequestDispatcher("vendita.jsp").forward(req, resp);
+			req.setAttribute("costo", GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+            req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 			
 		}
 		else if(4==azione)
 		{
              List<Vendita> lista=GestioneDataBase.stampaVendite();
 			 req.setAttribute("listaVendite", lista);
+
 			 req.getRequestDispatcher("stmVendite.jsp").forward(req, resp);
 
 		}else if(5==azione)
@@ -68,16 +70,9 @@ public class ControlloAzione extends HttpServlet
 			
 			req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini());
 			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
+			req.setAttribute("costo", GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
 
 			req.getRequestDispatcher("stmScontrini.jsp").forward(req, resp);
-
-            
-
-		}else if(6==azione)
-		{
-			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
-
-		
 
             
 
@@ -85,8 +80,8 @@ public class ControlloAzione extends HttpServlet
 		else if(7==azione)
 		{
 			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
-
-			req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
+			req.setAttribute("costo", GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+           	req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
 
             
 

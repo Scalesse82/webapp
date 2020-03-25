@@ -69,6 +69,8 @@ public class Venduto extends HttpServlet
             GestioneDataBase.impostaCostoScontrino(idScontrino, GestioneDataBase.importoScontrino(idScontrino));
             	
             req.setAttribute("idUtente",idUtente);
+			req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
+
 
 			req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
 				
