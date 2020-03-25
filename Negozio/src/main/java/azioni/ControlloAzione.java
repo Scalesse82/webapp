@@ -15,13 +15,24 @@ import models.Vendita;
 public class ControlloAzione extends HttpServlet
 {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String azione = req.getParameter("azione");
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
+	{
+		req.setAttribute("messaggio", "hai provato a fare un accesso diretto non consentito");
+	    req.getRequestDispatcher("login.jsp").forward(req, resp);
+		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException
+	{
+		
+
+		int azione = Integer.parseInt(req.getParameter("azione"));
 		try {
-		if ("Aggiungi prodotto".equalsIgnoreCase(azione)) {
+		if (0==azione) {
 			req.getRequestDispatcher("aggiungiprodotto.jsp").forward(req, resp);
 		}
-		else if("rimuovi prodotto".equalsIgnoreCase(azione))
+		else if(1==azione)
 		{
 			
 		    List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();			
@@ -29,32 +40,62 @@ public class ControlloAzione extends HttpServlet
 			req.getRequestDispatcher("rimuoviProdotto.jsp").forward(req, resp);
 
 		}		
-		else if ("modifica prodotto".equalsIgnoreCase(azione)) 
+		else if (2==azione) 
 		{
 			List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();
 			req.setAttribute("listaProdotti", lista);
 			req.getRequestDispatcher("modProdotto.jsp").forward(req, resp);
 		
 		} 
-		else if ("vendita prodotto".equalsIgnoreCase(azione)) 
+		else if (3==azione) 
 		{
+			int id = Integer.parseInt(req.getParameter("idUtente"));
+
 			List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();
 			req.setAttribute("listaProdotti", lista);
+			req.setAttribute("idUtente",id);
 			req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 			
 		}
-		else if("Stampa vendite".equalsIgnoreCase(azione))
+		else if(4==azione)
 		{
              List<Vendita> lista=GestioneDataBase.stampaVendite();
 			 req.setAttribute("listaVendite", lista);
 			 req.getRequestDispatcher("stmVendite.jsp").forward(req, resp);
+
+		}else if(5==azione)
+		{
+			
+			req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini());
+			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
+
+			req.getRequestDispatcher("stmScontrini.jsp").forward(req, resp);
+
+            
+
+		}else if(6==azione)
+		{
+			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
+
+		
+
+            
+
+		}
+		else if(7==azione)
+		{
+			req.setAttribute("idUtente",Integer.parseInt(req.getParameter("idUtente")));
+
+			req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
+
+            
 
 		}
 		
 		} catch (ClassNotFoundException | SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 }

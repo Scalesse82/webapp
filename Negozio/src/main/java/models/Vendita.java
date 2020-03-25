@@ -3,15 +3,15 @@ package models;
 public class Vendita 
 {
 	
-	private int idVendita;
+	private int idScontrino;
 	private int idProdotti;
 	private int qtaVenduta;
 	
 	
-	public Vendita(int idVendita, int idProdotti, int qtaVenduta) 
+	public Vendita(int idScontrino, int idProdotti, int qtaVenduta) 
 	{
 		
-		this.idVendita = idVendita;
+		this.idScontrino = idScontrino;
 		this.idProdotti = idProdotti;
 		this.qtaVenduta = qtaVenduta;
 	}
@@ -24,13 +24,15 @@ public class Vendita
 	}
 
 
-	public int getIdVendita() {
-		return idVendita;
+
+
+	public int getIdScontrino() {
+		return idScontrino;
 	}
 
 
-	public void setIdVendita(int idVendita) {
-		this.idVendita = idVendita;
+	public void setIdScontrino(int idScontrino) {
+		this.idScontrino = idScontrino;
 	}
 
 

@@ -14,6 +14,7 @@ table, th, td {
 
 </style>
 <body>
+
 <%List<Prodotto> lista=(List<Prodotto>) request.getAttribute("listaProdotti"); %>
 <table>
   <tr>
@@ -58,11 +59,13 @@ table, th, td {
   <label for="descrizione">Inserisci la descrizione del prodotto:</label>
   <input type="text" id="descrizione" name="descrizione"><br><br>
   <input type="submit" value="modifica">
+  
 
 </form>
 
-<form action="azioniNegozio.jsp">
+<form action="login.jsp">
   <input type="submit" value ="pagina iniziale"><br><br>
+  
   </form>
   
 

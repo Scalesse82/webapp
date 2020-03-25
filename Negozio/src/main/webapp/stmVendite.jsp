@@ -18,7 +18,7 @@ table, th, td {
 <%List<Vendita> lista=(List<Vendita>) request.getAttribute("listaVendite"); %>
 <table>
   <tr>
-    <th>Id Vendita</th>
+    <th>Id Scontrino</th>
     <th>Id Prodotto</th>
     <th>Quantita Venduta</th>
     
@@ -27,7 +27,7 @@ table, th, td {
   <% for(Vendita v : lista) { %>
   <tr>
     <td>
-				<%=v.getIdVendita()%>
+				<%=v.getIdScontrino()%>
 	</td>  
 	<td>
 				<%=v.getIdProdotti()%>
@@ -41,7 +41,7 @@ table, th, td {
 
 
 
-<form action="azioniNegozio.jsp">
+<form action="login.jsp">
   <input type="submit" value ="pagina iniziale"><br><br>
   </form>
 

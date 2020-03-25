@@ -12,8 +12,9 @@
 
 <h2> <%= risultato %> </h2>
 
-<form action="azioniNegozio.jsp">
+<form action="login.jsp">
   <input type="submit" value ="pagina iniziale"><br><br>
+  
   </form>
 
 

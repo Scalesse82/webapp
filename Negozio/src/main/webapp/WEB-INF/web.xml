@@ -58,6 +58,16 @@
 		<url-pattern> /controllerAzione</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>controlloAccesso</servlet-name>
+		<servlet-class>azioni.Login</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>controlloAccesso</servlet-name>
+		<url-pattern> /controlloAccesso</url-pattern>
+	</servlet-mapping>
+	
 
 
 

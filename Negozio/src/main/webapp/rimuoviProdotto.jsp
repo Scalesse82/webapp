@@ -15,6 +15,7 @@ table, th, td {
 </style>
 <body>
 
+
 <%List<Prodotto> lista=(List<Prodotto>) request.getAttribute("listaProdotti"); %>
 <table>
   <tr>
@@ -53,11 +54,13 @@ table, th, td {
   <input type="number" id="idProdotto" name="idProdotto"><br><br>
   
   <input type="submit" value="rimuovi">
+  
 
 </form>
 
-<form action="azioniNegozio.jsp">
+<form action="login.jsp">
   <input type="submit" value ="pagina iniziale"><br><br>
+  
   </form>
   
 

@@ -17,12 +17,15 @@
   <input type="number" id="prezzo" name="prezzo"><br><br>
   <label for="descrizione">Inserisci la descrizione del prodotto:</label>
   <input type="text" id="descrizione" name="descrizione"><br><br>
+  
   <input type="submit" value="aggiungi">
+  
 
 </form>
 
-<form action="azioniNegozio.jsp">
+<form action="login.jsp">
   <input type="submit" value ="pagina iniziale"><br><br>
+  
   </form>
   
 
