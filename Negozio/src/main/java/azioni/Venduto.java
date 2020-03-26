@@ -50,6 +50,8 @@ public class Venduto extends HttpServlet
 			   req.setAttribute("messaggio", "aggiunto al carrello");
 	           req.setAttribute("idUtente",idUtente);
 			   req.setAttribute("listaProdotti", GestioneDataBase.stampaProdotti());
+			   req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
+
 
 
 			   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
