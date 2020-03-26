@@ -3,73 +3,86 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
 	version="3.1">
-   
 
- <servlet>
+
+	<servlet>
 		<servlet-name>aggProdotto</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.AggiuntaProdotto</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>aggProdotto</servlet-name>
 		<url-pattern> /aggProdotto</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>rimProdotto</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.RimozioneProdotto</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>rimProdotto</servlet-name>
 		<url-pattern> /rimProdotto</url-pattern>
 	</servlet-mapping>
-	
-	
-	
+
+
+
 	<servlet>
 		<servlet-name>modificaProdotto</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.modificaProdotto</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>modificaProdotto</servlet-name>
 		<url-pattern> /modificaProdotto</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>vendiProdotto</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.Venduto</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>vendiProdotto</servlet-name>
 		<url-pattern> /vendiProdotto</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<servlet>
 		<servlet-name>controllerAzione</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.ControlloAzione</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>controllerAzione</servlet-name>
 		<url-pattern> /controllerAzione</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>controlloAccesso</servlet-name>
 		<servlet-class>it.scalesse.ortofrutta.controller.Login</servlet-class>
 	</servlet>
-	
+
 	<servlet-mapping>
 		<servlet-name>controlloAccesso</servlet-name>
 		<url-pattern> /controlloAccesso</url-pattern>
 	</servlet-mapping>
 	
+	<servlet>
+		<servlet-name>modificaSingoloProdotto</servlet-name>
+		<servlet-class>it.scalesse.ortofrutta.controller.ControllerEditProduct</servlet-class>
+	</servlet>
 
-
+	<servlet-mapping>
+		<servlet-name>modificaSingoloProdotto</servlet-name>
+		<url-pattern> /modificaSingoloProdotto</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	<welcome-file-list>
+		<welcome-file>/login.jsp</welcome-file>
+	</welcome-file-list>
 
 
 </web-app>
