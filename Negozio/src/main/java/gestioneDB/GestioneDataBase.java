@@ -22,8 +22,8 @@ public class GestioneDataBase
 	
 	public static Connection connessioneDatabase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://remotemysql.com:3306/xgouH99Q5G?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
-		Connection connessione = DriverManager.getConnection(url, "xgouH99Q5G", "sKoY2hSBYL");
+		String url = "jdbc:mysql://localhost:3306/scalesseShop?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
+		Connection connessione = DriverManager.getConnection(url, "root", "password");
 		return connessione;
 	}
 	
