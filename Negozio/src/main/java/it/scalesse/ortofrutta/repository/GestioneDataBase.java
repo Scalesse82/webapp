@@ -19,12 +19,12 @@ public class GestioneDataBase {
 
 	public static Connection connessioneDatabase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/scalesseshop?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
-		Connection connessione = DriverManager.getConnection(url, "root", "password");
+		String url = "jdbc:mysql://localhost:3306/negozio?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
+		Connection connessione = DriverManager.getConnection(url, "root", "Giuseppe");
 		return connessione;
 	}
 
-	public static boolean AccessoUtente(Utente u) throws ClassNotFoundException, SQLException {
+	public static String accessoUtente(Utente u) throws ClassNotFoundException, SQLException {
 		Connection connessione = connessioneDatabase();
 
 		String query = "select * from utente where idUtente=? and pass=?;";
@@ -32,14 +32,14 @@ public class GestioneDataBase {
 		statement.setInt(1, u.getIdUtente());
 		statement.setString(2, u.getPass());
 		ResultSet risultato = statement.executeQuery();
-		while (risultato.next()) {
-			connessione.close();
-			return true;
+		while (risultato.next()) 
+		{
+			
+			return risultato.getString(5);
 
 		}
 
-		connessione.close();
-		return false;
+		return null;
 
 	}
 
@@ -142,12 +142,12 @@ public class GestioneDataBase {
 	public static List<Vendita> stampaVendite() throws ClassNotFoundException, SQLException {
 		List<Vendita> lista = new ArrayList<>();
 		Connection connessione = connessioneDatabase();
-		String query = "select * from vendite ;";
+		String query = "SELECT vendite.*,prodotti.nome FROM vendite inner join prodotti on vendite.idProdotto=prodotti.idProdotto;";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			lista.add(new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3)));
+			lista.add(new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3),risultato.getString(4)));
 
 		}
 		connessione.close();
@@ -285,6 +285,22 @@ public class GestioneDataBase {
 		}		
 
 		return null;
+	}
+    
+	public static List<Vendita> stampaDettagliScontrini(int idScontrino) throws ClassNotFoundException, SQLException {
+		List<Vendita> lista = new ArrayList<>();
+		Connection connessione = connessioneDatabase();
+		String query = "SELECT vendite.*,prodotti.nome FROM vendite inner join prodotti on vendite.idProdotto=prodotti.idProdotto where idScontrino=?;";
+		PreparedStatement statement = connessione.prepareStatement(query);
+		statement.setInt(1, idScontrino);
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+
+			lista.add(new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3),risultato.getString(4)));
+
+		}
+		connessione.close();
+		return lista;
 	}
 
 }

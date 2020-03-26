@@ -41,6 +41,17 @@ table, th, td {
 	<td>
 				<%=v.getCosto()%>
 	</td>  
+	<td>
+	<form action="dettagliScontrino" method="post">
+	<input type="number" hidden="true" name="id" value=<%=v.getIdScontrino() %>>
+	<input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
+<input type="hidden" id="costo" name="costo" value=<%=(double)request.getAttribute("costo")%>>
+<button type="submit" class="btn btn-danger" >Dettagli</button>	</form>
+
+
+	</td>
+	  </tr>
+	
 	
 	<% } %>
 </table>
@@ -51,7 +62,7 @@ table, th, td {
 <form action="controllerAzione" method="post">
 <button type="submit" class="btn btn-primary" name="azione" value = "7" >indietro</button>  
 <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
-<input type="hidden" id="idUtente" name="idUtente" value=<%=(double)request.getAttribute("costo")%>>
+<input type="hidden" id="costo" name="costo" value=<%=(double)request.getAttribute("costo")%>>
 
   
   </form>

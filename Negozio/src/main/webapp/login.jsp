@@ -40,12 +40,6 @@
   <button type="submit" class="btn btn-primary">LogIn</button><br><br>
 </form>
 
-<form action="controllerAzione" method="post">
-<button type="submit" class="btn btn-primary" name="azione" value = "0" >Aggiungi prodotto</button>
-<button type="submit" class="btn btn-primary" name="azione" value = "1" >rimuovi prodotto</button>
-<button type="submit" class="btn btn-primary" name="azione" value = "2" >modifica prodotto</button>
-<button type="submit" class="btn btn-primary" name="azione" value = "4" >Stampa vendite</button>
-</form>
 
 
 <% } %>

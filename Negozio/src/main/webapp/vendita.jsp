@@ -62,18 +62,18 @@ table, th, td {
 
 
 <form action="vendiProdotto" method="post">
-  
+  <br>
   <label for="idProdotto">Inserisci l'id del prodotto</label>
   <input type="number" id="idProdotto" name="idProdotto"><br><br>
   <label for="qtaVenduta">inserisci la quantita da vendere</label>
   <input type="number" id="qtaVenduta" name="qtaVenduta"><br><br>
-  <button type="submit" class="btn btn-primary" name="azione" value = "1" >aggiungi</button>
-  <button type="submit" class="btn btn-primary" name="azione" value = "2" >paga</button>
-    <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
+  <button type="submit" class="btn btn-success" name="azione" value = "1" >aggiungi</button>
+  <button type="submit" class="btn btn-danger" name="azione" value = "2" >paga</button>
+  <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
   
 
 </form>
-
+<br>
 <form action="controllerAzione" method="post">
 <button type="submit" class="btn btn-primary" name="azione" value = "7" >indietro</button>  
 <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>

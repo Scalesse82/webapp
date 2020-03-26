@@ -4,6 +4,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <head>
 <meta charset="ISO-8859-1">
 <title>Prodotti</title>
@@ -20,6 +22,7 @@ table, th, td {
 
 <form action="modificaProdotto" method="post">
 
+<br>
   <label for="idProdotto">Inserisci l'id del prodotto</label>
   <input type="number" id="idProdotto" name="idProdotto" value=<%=prodotto.getIdProdotto() %> disabled><br><br>
   <input type="number" id="idProdotto" name="idProdotto" value=<%=prodotto.getIdProdotto() %> hidden="true">
@@ -32,15 +35,16 @@ table, th, td {
   <input type="number" id="prezzo" name="prezzo" value=<%=prodotto.getPrezzo()%> ><br><br>
   <label for="descrizione">Inserisci la descrizione del prodotto:</label>
   <input type="text" id="descrizione" name="descrizione" value=<%=prodotto.getDescrizione()%>><br><br>
-  <input type="submit" value="modifica">
-  
+<button type="submit" class="btn btn-danger" >Modifica</button>	<br><br>
 
 </form>
-
-<form action="login.jsp">
-  <input type="submit" value ="pagina iniziale"><br><br>
   
-  </form>
+
+
+
+<form action="azioniInterno.jsp">
+ <button type="submit" class="btn btn-primary" >Pagina Iniziale</button>
+ </form>
   
 
 

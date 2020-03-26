@@ -4,6 +4,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <head>
 <meta charset="ISO-8859-1">
 <title>Prodotti</title>
@@ -47,35 +49,15 @@ table, th, td {
 	<td>
 	<form action="modificaSingoloProdotto" method="post">
 	<input type="number" hidden="true" name="id" value=<%=p.getIdProdotto() %>>
-	<button> Edita</button>
-	</form>
+<button type="submit" class="btn btn-danger" >Modifica</button>	</form>
 	</td>
   </tr>
 	<% } %>
 </table>
-
-<!-- <form action="modificaProdotto" method="post"> -->
-
-<!--   <label for="idProdotto">Inserisci l'id del prodotto</label> -->
-<!--   <input type="number" id="idProdotto" name="idProdotto"><br><br> -->
-<!--   <label for="nomeProdotto">Inserisci il nome del prodotto:</label> -->
-<!--   <input type="text" id="nomeProdotto" name="nomeProdotto"><br><br> -->
-<!--   <label for="qta">Inserisci la quantita del prodotto</label> -->
-<!--   <input type="number" id="qta" name="qta"><br><br> -->
-<!--   <label for="prezzo">Inserisci il prezzo del prodotto</label> -->
-<!--   <input type="number" id="prezzo" name="prezzo"><br><br> -->
-<!--   <label for="descrizione">Inserisci la descrizione del prodotto:</label> -->
-<!--   <input type="text" id="descrizione" name="descrizione"><br><br> -->
-<!--   <input type="submit" value="modifica"> -->
-  
-
-<!-- </form> -->
-
-<form action="login.jsp">
-  <input type="submit" value ="pagina iniziale"><br><br>
-  
-  </form>
-  
+<br>
+<form action="azioniInterno.jsp">
+ <button type="submit" class="btn btn-primary" >Pagina Iniziale</button>
+ </form>
 
 
 

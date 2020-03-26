@@ -49,12 +49,22 @@ public class Venduto extends HttpServlet
 			   carrello.add(new Vendita(idProdotto, qtaVenduta));
 			   req.setAttribute("messaggio", "aggiunto al carrello");
 	           req.setAttribute("idUtente",idUtente);
-			   req.setAttribute("listaProdotti", GestioneDataBase.stampaProdotti());
+			   req.setAttribute("listaProdotti", aggiornaLista(GestioneDataBase.stampaProdotti()));
 			   req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
 
 
 
 			   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
+			   }
+			   else
+			   {
+				   req.setAttribute("messaggio", "quantità insufficente");
+				   req.setAttribute("idUtente",idUtente);
+				   req.setAttribute("listaProdotti", aggiornaLista(GestioneDataBase.stampaProdotti()));
+				   req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
+				   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
+
+				   
 			   }
 				
 			}
@@ -83,5 +93,24 @@ public class Venduto extends HttpServlet
 				e.printStackTrace();
 			}
 		}
+	
+	 public List<Prodotto> aggiornaLista(List<Prodotto> lista)
+	 { 
+		 for (Vendita v : carrello) 
+		 {
+			 for (int i=0;i<lista.size();i++) 
+			 {
+				if(v.getIdProdotti()==lista.get(i).getIdProdotto())
+				{
+			         lista.get(i).setQta(lista.get(i).getQta()-v.getQtaVenduta());
+					
+				}
+			 }
+			
+		 }
+		 return lista;		 
+		 
+	 }
+	
 	
 	}

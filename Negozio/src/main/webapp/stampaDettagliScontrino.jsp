@@ -8,15 +8,14 @@
 
 <head>
 <meta charset="ISO-8859-1">
-<title>VENDITE</title>
+<title>Insert title here</title>
 </head>
 <style>
 table, th, td {
   border: 1px solid black;
-}
+
 </style>
 <body>
-
 <%List<Vendita> lista=(List<Vendita>) request.getAttribute("listaVendite"); %>
 <table>
   <tr>
@@ -43,8 +42,11 @@ table, th, td {
 
 
 <br>
-<form action="azioniInterno.jsp">
+<form action="stmScontrini.jsp">
  <button type="submit" class="btn btn-primary" >Pagina Iniziale</button>
  </form>
+
+
+
 </body>
 </html>

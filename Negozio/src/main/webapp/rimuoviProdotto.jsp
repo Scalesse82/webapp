@@ -4,6 +4,8 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <head>
 <meta charset="ISO-8859-1">
 <title>Rimozione prodotto</title>
@@ -43,25 +45,21 @@ table, th, td {
 	<td>
 				<%=p.getDescrizione()%>
 	</td>  
+	<td>
+	<form action="rimProdotto" method="post">
+	<input type="number" hidden="true" name="idProdotto" value=<%=p.getIdProdotto() %>>
+       <button type="submit" class="btn btn-danger" >Rimuovi</button>
+	</form>
+	</td>
   </tr>
 	<% } %>
 </table>
 
 
-<form action="rimProdotto" method="post">
-  
-  <label for="idProdotto">Inserisci l'id del prodotto da rimuovere</label>
-  <input type="number" id="idProdotto" name="idProdotto"><br><br>
-  
-  <input type="submit" value="rimuovi">
-  
 
-</form>
-
-<form action="login.jsp">
-  <input type="submit" value ="pagina iniziale"><br><br>
-  
-  </form>
+ <form action="azioniInterno.jsp">
+ <button type="submit" class="btn btn-primary" >Pagina Iniziale</button>
+ </form>
   
 
 </body>

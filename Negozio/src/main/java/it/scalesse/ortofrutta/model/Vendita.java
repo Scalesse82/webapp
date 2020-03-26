@@ -6,8 +6,18 @@ public class Vendita
 	private int idScontrino;
 	private int idProdotti;
 	private int qtaVenduta;
+	private String nomeProdotto;
 	
 	
+	public Vendita(int idScontrino, int idProdotti, int qtaVenduta, String nomeProdotto)
+	{
+		this.idScontrino = idScontrino;
+		this.idProdotti = idProdotti;
+		this.qtaVenduta = qtaVenduta;
+		this.nomeProdotto = nomeProdotto;
+	}
+
+
 	public Vendita(int idScontrino, int idProdotti, int qtaVenduta) 
 	{
 		
@@ -24,6 +34,16 @@ public class Vendita
 	}
 
 
+
+
+	public String getNomeProdotto() {
+		return nomeProdotto;
+	}
+
+
+	public void setNomeProdotto(String nomeProdotto) {
+		this.nomeProdotto = nomeProdotto;
+	}
 
 
 	public int getIdScontrino() {
