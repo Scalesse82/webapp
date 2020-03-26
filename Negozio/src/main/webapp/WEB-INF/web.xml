@@ -7,7 +7,7 @@
 
  <servlet>
 		<servlet-name>aggProdotto</servlet-name>
-		<servlet-class>azioni.AggiuntaProdotto</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.AggiuntaProdotto</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -17,7 +17,7 @@
 	
 	<servlet>
 		<servlet-name>rimProdotto</servlet-name>
-		<servlet-class>azioni.RimozioneProdotto</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.RimozioneProdotto</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -29,7 +29,7 @@
 	
 	<servlet>
 		<servlet-name>modificaProdotto</servlet-name>
-		<servlet-class>azioni.modificaProdotto</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.modificaProdotto</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -39,7 +39,7 @@
 	
 	<servlet>
 		<servlet-name>vendiProdotto</servlet-name>
-		<servlet-class>azioni.Venduto</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.Venduto</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -50,7 +50,7 @@
 	
 	<servlet>
 		<servlet-name>controllerAzione</servlet-name>
-		<servlet-class>azioni.ControlloAzione</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.ControlloAzione</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
@@ -60,7 +60,7 @@
 	
 	<servlet>
 		<servlet-name>controlloAccesso</servlet-name>
-		<servlet-class>azioni.Login</servlet-class>
+		<servlet-class>it.scalesse.ortofrutta.controller.Login</servlet-class>
 	</servlet>
 	
 	<servlet-mapping>
