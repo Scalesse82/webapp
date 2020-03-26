@@ -1,4 +1,4 @@
-package azioni;
+package it.scalesse.ortofrutta.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gestioneDB.GestioneDataBase;
-import models.Vendita;
+import it.scalesse.ortofrutta.model.Vendita;
+import it.scalesse.ortofrutta.repository.GestioneDataBase;
 
 public class ControlloAzione extends HttpServlet
 {
@@ -35,14 +35,14 @@ public class ControlloAzione extends HttpServlet
 		else if(1==azione)
 		{
 			
-		    List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();			
+		    List<it.scalesse.ortofrutta.model.Prodotto>lista = GestioneDataBase.stampaProdotti();			
 			req.setAttribute("listaProdotti", lista);
 			req.getRequestDispatcher("rimuoviProdotto.jsp").forward(req, resp);
 
 		}		
 		else if (2==azione) 
 		{
-			List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();
+			List<it.scalesse.ortofrutta.model.Prodotto>lista = GestioneDataBase.stampaProdotti();
 			req.setAttribute("listaProdotti", lista);
 			req.getRequestDispatcher("modProdotto.jsp").forward(req, resp);
 		
@@ -51,7 +51,7 @@ public class ControlloAzione extends HttpServlet
 		{
 			int id = Integer.parseInt(req.getParameter("idUtente"));
 
-			List<models.Prodotto>lista = GestioneDataBase.stampaProdotti();
+			List<it.scalesse.ortofrutta.model.Prodotto>lista = GestioneDataBase.stampaProdotti();
 			req.setAttribute("listaProdotti", lista);
 			req.setAttribute("idUtente",id);
 			req.setAttribute("costo", GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));

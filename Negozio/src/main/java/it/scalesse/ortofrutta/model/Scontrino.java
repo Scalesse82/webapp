@@ -1,4 +1,4 @@
-package models;
+package it.scalesse.ortofrutta.model;
 
 import java.util.ArrayList;
 import java.util.List;

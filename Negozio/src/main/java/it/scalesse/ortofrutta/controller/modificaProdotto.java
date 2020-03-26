@@ -1,4 +1,4 @@
-package azioni;
+package it.scalesse.ortofrutta.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import gestioneDB.GestioneDataBase;
-import models.Prodotto;
+import it.scalesse.ortofrutta.model.Prodotto;
+import it.scalesse.ortofrutta.repository.GestioneDataBase;
 
 public class modificaProdotto extends HttpServlet
 {

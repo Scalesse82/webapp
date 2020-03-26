@@ -1,4 +1,4 @@
-<%@page import="models.Vendita"%>
+<%@page import="it.scalesse.ortofrutta.model.Vendita"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>

@@ -1,4 +1,4 @@
-package gestioneDB;
+package it.scalesse.ortofrutta.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,11 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-
-import models.Prodotto;
-import models.Scontrino;
-import models.Utente;
-import models.Vendita;
+import it.scalesse.ortofrutta.model.Prodotto;
+import it.scalesse.ortofrutta.model.Scontrino;
+import it.scalesse.ortofrutta.model.Utente;
+import it.scalesse.ortofrutta.model.Vendita;
 
 public class GestioneDataBase 
 {
@@ -22,7 +21,7 @@ public class GestioneDataBase
 	
 	public static Connection connessioneDatabase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/scalesseShop?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
+		String url = "jdbc:mysql://localhost:3306/scalesseshop?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
 		Connection connessione = DriverManager.getConnection(url, "root", "password");
 		return connessione;
 	}

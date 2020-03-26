@@ -1,4 +1,4 @@
-package models;
+package it.scalesse.ortofrutta.model;
 
 public class Utente 
 {
