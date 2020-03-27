@@ -19,8 +19,8 @@ public class GestioneDataBase {
 
 	public static Connection connessioneDatabase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/negozio?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
-		Connection connessione = DriverManager.getConnection(url, "root", "Giuseppe");
+		String url = "jdbc:mysql://remotemysql.com:3306/nc0EzNXaS6?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
+		Connection connessione = DriverManager.getConnection(url, "nc0EzNXaS6", "Os4kXpFmYy");
 		return connessione;
 	}
 
@@ -241,11 +241,12 @@ public class GestioneDataBase {
 
 	}
 
-	public static List<Scontrino> stampaScontrini() throws ClassNotFoundException, SQLException {
+	public static List<Scontrino> stampaScontrini(int idUtente) throws ClassNotFoundException, SQLException {
 		List<Scontrino> lista = new ArrayList<>();
 		Connection connessione = connessioneDatabase();
-		String query = "select * from scontrino ;";
+		String query = "select * from scontrino where utente=? ;";
 		PreparedStatement statement = connessione.prepareStatement(query);
+		statement.setInt(1, idUtente);
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 

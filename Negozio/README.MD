@@ -1,1 +1,2 @@
-idutente 123 pass admin
+idutente 123 pass admin cliente
+idutente 111 pass peppe dipendente interno

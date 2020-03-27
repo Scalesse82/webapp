@@ -79,7 +79,7 @@ public class Venduto extends HttpServlet
 			}
             
             GestioneDataBase.impostaCostoScontrino(idScontrino, GestioneDataBase.importoScontrino(idScontrino));
-            	
+            carrello.clear();	
             req.setAttribute("idUtente",idUtente);
 			req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
 

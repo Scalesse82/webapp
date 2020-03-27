@@ -23,9 +23,10 @@ public class DetScontrino extends HttpServlet {
 
 			int idScontrino=Integer.parseInt(req.getParameter("id"));
 			List<Vendita> lista = GestioneDataBase.stampaDettagliScontrini(idScontrino);
-			req.setAttribute("Lista", lista);
+			req.setAttribute("lista", lista);
 			req.setAttribute("idUtente",idUtente);  
 			req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
+			req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini(idUtente));
 			req.getRequestDispatcher("stampaDettagliScontrino.jsp").forward(req, resp);
 		
 		

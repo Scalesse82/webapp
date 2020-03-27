@@ -53,7 +53,7 @@ public class ControlloAzione extends HttpServlet {
 				req.getRequestDispatcher("stmVendite.jsp").forward(req, resp);
 				break;
 			case 5:
-				req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini());
+				req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
 				req.setAttribute("idUtente", Integer.parseInt(req.getParameter("idUtente")));
 				req.setAttribute("costo",
 						GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));

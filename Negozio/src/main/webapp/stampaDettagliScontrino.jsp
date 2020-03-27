@@ -1,3 +1,4 @@
+<%@page import="it.scalesse.ortofrutta.model.Scontrino"%>
 <%@page import="it.scalesse.ortofrutta.model.Vendita"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -16,7 +17,9 @@ table, th, td {
 
 </style>
 <body>
-<%List<Vendita> lista=(List<Vendita>) request.getAttribute("listaVendite"); %>
+<%List<Vendita> lista=(List<Vendita>) request.getAttribute("lista"); %>
+<%List<Scontrino> listaScontrini=(List<Scontrino>) request.getAttribute("listaScontrini"); %>
+
 <table>
   <tr>
     <th>Id Scontrino</th>
@@ -42,8 +45,10 @@ table, th, td {
 
 
 <br>
-<form action="stmScontrini.jsp">
- <button type="submit" class="btn btn-primary" >Pagina Iniziale</button>
+<form action="controllerAzione" method="post">
+<input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
+
+<button type="submit" class="btn btn-primary" name="azione" value = "5" >torna indietro</button>
  </form>
 
 
