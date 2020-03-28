@@ -26,43 +26,49 @@ public class ControlloAzione extends HttpServlet {
 
 		int azione = Integer.parseInt(req.getParameter("azione"));
 		try {
-			List<Prodotto> lista = GestioneDataBase.stampaProdotti();
+			GestioneDataBase gest=new GestioneDataBase();
+
+			List<Prodotto> lista = gest.stampaProdotti();
 			switch (azione) {
 			case 0:
+				gest.close();
 				req.getRequestDispatcher("aggiungiprodotto.jsp").forward(req, resp);
 				break;
 			case 1:
 				req.setAttribute("listaProdotti", lista);
+				gest.close();
 				req.getRequestDispatcher("rimuoviProdotto.jsp").forward(req, resp);
 				break;
 			case 2:
 				req.setAttribute("listaProdotti", lista);
+				gest.close();
 				req.getRequestDispatcher("modProdotto.jsp").forward(req, resp);
 				break;
 			case 3:
 				int id = Integer.parseInt(req.getParameter("idUtente"));
 				req.setAttribute("listaProdotti", lista);
 				req.setAttribute("idUtente", id);
-				req.setAttribute("costo",
-						GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				req.setAttribute("costo",gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				gest.close();
 				req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 				break;
 			case 4:
-				List<Vendita> listaVendite = GestioneDataBase.stampaVendite();
+				List<Vendita> listaVendite = gest.stampaVendite();
 				req.setAttribute("listaVendite", listaVendite);
+				gest.close();
 				req.getRequestDispatcher("stmVendite.jsp").forward(req, resp);
 				break;
 			case 5:
-				req.setAttribute("listaScontrini", GestioneDataBase.stampaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				req.setAttribute("listaScontrini", gest.stampaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
 				req.setAttribute("idUtente", Integer.parseInt(req.getParameter("idUtente")));
-				req.setAttribute("costo",
-						GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				req.setAttribute("costo",gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				gest.close();
 				req.getRequestDispatcher("stmScontrini.jsp").forward(req, resp);
 				break;
 			case 7:
 				req.setAttribute("idUtente", Integer.parseInt(req.getParameter("idUtente")));
-				req.setAttribute("costo",
-						GestioneDataBase.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				req.setAttribute("costo",gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				gest.close();
 				req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
 				break;
 			}

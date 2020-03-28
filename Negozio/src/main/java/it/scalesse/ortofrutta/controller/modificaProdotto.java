@@ -27,22 +27,26 @@ public class modificaProdotto extends HttpServlet
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
 		try {
+			GestioneDataBase gest = new GestioneDataBase();
+
 			int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
 			String nome=req.getParameter("nomeProdotto");
 			int qta=Integer.parseInt(req.getParameter("qta"));
 			int prezzo=Integer.parseInt(req.getParameter("prezzo"));
 			String descrizione=req.getParameter("descrizione");
 			
-		    GestioneDataBase.aggiornaProdotto(new Prodotto(idProdotto, nome, qta, prezzo, descrizione));
+			gest.aggiornaProdotto(new Prodotto(idProdotto, nome, qta, prezzo, descrizione));
 				
 		    req.setAttribute("risultato", "prodotto modificato");
+		    gest.close();
+			req.getRequestDispatcher("risultato.jsp").forward(req, resp);
+
 
 			} catch (ClassNotFoundException | SQLException e) {
 				e.printStackTrace();
 			}
 	        
 			
-			req.getRequestDispatcher("risultato.jsp").forward(req, resp);
 		
 		
 		

@@ -18,8 +18,10 @@ public class ControllerEditProduct extends HttpServlet {
 		
 		int idProdotto = Integer.parseInt(req.getParameter("id"));
 		try {
-			Prodotto p = GestioneDataBase.getProdottoById(idProdotto);
+			GestioneDataBase gest=new GestioneDataBase();
+			Prodotto p = gest.getProdottoById(idProdotto);
 			req.setAttribute("prodottoOld", p);
+			gest.close();
 			req.getRequestDispatcher("modificaSingoloProdotto.jsp").forward(req, resp);
 			
 			

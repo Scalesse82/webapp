@@ -39,29 +39,30 @@ public class Venduto extends HttpServlet
 
 		int azione = Integer.parseInt(req.getParameter("azione"));
 		try {
+			GestioneDataBase gest = new GestioneDataBase();
+
 			if(1==azione)
 			{ 
-			   
+
 			   int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
 			   int qtaVenduta=Integer.parseInt(req.getParameter("qtaVenduta"));
-			   if(GestioneDataBase.controlloQta(new Vendita(idProdotto, qtaVenduta))>0)
+			   if(gest.controlloQta(new Vendita(idProdotto, qtaVenduta))>0)
 			   {   
 			   carrello.add(new Vendita(idProdotto, qtaVenduta));
 			   req.setAttribute("messaggio", "aggiunto al carrello");
 	           req.setAttribute("idUtente",idUtente);
-			   req.setAttribute("listaProdotti", aggiornaLista(GestioneDataBase.stampaProdotti()));
-			   req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
-
-
-
+			   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti()));
+			   req.setAttribute("costo", gest.sommaScontrini(idUtente));
+			   gest.close();
 			   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 			   }
 			   else
 			   {
 				   req.setAttribute("messaggio", "quantità insufficente");
 				   req.setAttribute("idUtente",idUtente);
-				   req.setAttribute("listaProdotti", aggiornaLista(GestioneDataBase.stampaProdotti()));
-				   req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
+				   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti()));
+				   req.setAttribute("costo", gest.sommaScontrini(idUtente));
+				   gest.close();
 				   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 
 				   
@@ -71,19 +72,18 @@ public class Venduto extends HttpServlet
 			else if(2==azione)
 			{
 			
-			int idScontrino=GestioneDataBase.creaScontrino(idUtente);
+			int idScontrino=gest.creaScontrino(idUtente);
             for (Vendita v : carrello) 
             {
-            	GestioneDataBase.aggiungiVendita(new Vendita(idScontrino, v.getIdProdotti(), v.getQtaVenduta()));
+            	gest.aggiungiVendita(new Vendita(idScontrino, v.getIdProdotti(), v.getQtaVenduta()));
             	
 			}
             
-            GestioneDataBase.impostaCostoScontrino(idScontrino, GestioneDataBase.importoScontrino(idScontrino));
+            gest.impostaCostoScontrino(idScontrino, gest.importoScontrino(idScontrino));
             carrello.clear();	
             req.setAttribute("idUtente",idUtente);
-			req.setAttribute("costo", GestioneDataBase.sommaScontrini(idUtente));
-
-
+			req.setAttribute("costo", gest.sommaScontrini(idUtente));
+			gest.close();
 			req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
 				
 				

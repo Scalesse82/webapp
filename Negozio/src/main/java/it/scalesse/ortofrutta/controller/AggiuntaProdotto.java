@@ -29,15 +29,17 @@ public class AggiuntaProdotto extends HttpServlet
 	{
 	
 		try {
+			GestioneDataBase gest=new GestioneDataBase();
 			
 			String nome=req.getParameter("nomeProdotto");
 			int qta=Integer.parseInt(req.getParameter("qta"));
 			int prezzo=Integer.parseInt(req.getParameter("prezzo"));
 			String descrizione=req.getParameter("descrizione");
 			
-			GestioneDataBase.aggiungiProdotto(new Prodotto(nome, qta, prezzo, descrizione));
+			gest.aggiungiProdotto(new Prodotto(nome, qta, prezzo, descrizione));
 			
 			req.setAttribute("risultato", "prodotto aggiunto");
+			gest.close();
 			
 			req.getRequestDispatcher("risultato.jsp").forward(req, resp);
 			

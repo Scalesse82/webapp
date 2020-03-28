@@ -29,23 +29,28 @@ public class Login extends HttpServlet
 		int id=Integer.parseInt(req.getParameter("idUtente"));
 		String pass=req.getParameter("Password");
 		try {
-			String tipo=GestioneDataBase.accessoUtente(new Utente(id, pass));
+			GestioneDataBase gest = new GestioneDataBase();
+
+			String tipo=gest.accessoUtente(new Utente(id, pass));
 
 			if(tipo==null)
 			{
 				req.setAttribute("messaggio", "controllare id e pass ");
+				gest.close();
 			    req.getRequestDispatcher("home.jsp").forward(req, resp);				
 			}
 			
 			if(tipo.equals("cliente"))
 			{
 				req.setAttribute("idUtente",id);
-				req.setAttribute("costo", GestioneDataBase.sommaScontrini(id));
+				req.setAttribute("costo", gest.sommaScontrini(id));
+				gest.close();
 				req.getRequestDispatcher("azioniNegozio.jsp").forward(req, resp);
 			}
 		    else if(tipo.equals("interno"))
 		    {
-			    req.getRequestDispatcher("azioniInterno.jsp").forward(req, resp);
+				gest.close();
+		    	req.getRequestDispatcher("azioniInterno.jsp").forward(req, resp);
 		    	
 		    }
 		
