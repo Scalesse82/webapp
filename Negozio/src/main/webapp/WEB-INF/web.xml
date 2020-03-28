@@ -89,6 +89,15 @@
 		<url-pattern> /dettagliScontrino</url-pattern>
 	</servlet-mapping>
 	
+		<servlet>
+		<servlet-name>CreaUtente</servlet-name>
+		<servlet-class>it.scalesse.ortofrutta.controller.CreaUtente</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CreaUtente</servlet-name>
+		<url-pattern> /CreaUtente</url-pattern>
+	</servlet-mapping>
 	
 	
 	

@@ -44,13 +44,14 @@
   <label for="idUtente" class="sr-only" >Id Utente</label>
   <input type="number" style="width:150px; height:50px;margin: auto" id="idUtente" name="idUtente" class="form-control" placeholder="Id Utente" required autofocus>
   <label for="Password" class="sr-only">Password</label>
-  <input type="Password" style="width:150px; height:50px;margin: auto" id="Password" name ="Password" class="form-control" placeholder="Password" required>
-    
-  <button  class="btn btn-lg btn-primary btn-block"  style="width:150px; height: 50px;margin: auto" type="submit">Sign in</button>
-  
-  <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
-  
+  <input type="Password" style="width:150px; height:50px;margin: auto" id="Password" name ="Password" class="form-control" placeholder="Password" required>  
+  <button  class="btn btn-lg btn-primary btn-block"  style="width:150px; height: 50px;margin: auto" type="submit">Sign in</button>  
 </form>
-
+  <form action="controllerAzione" method="post">
+  <input type="hidden" id="tipo" name="tipo" value="cliente">
+  <br>
+  <button  class="btn btn-lg btn-primary btn-block"  style="width:150px; height: 50px;margin: auto" name="azione" type="submit" value="6">Registrati</button>
+   <p class="mt-5 mb-3 text-muted">&copy; 2017-2020</p>
+  </form>
 </body>
 </html>

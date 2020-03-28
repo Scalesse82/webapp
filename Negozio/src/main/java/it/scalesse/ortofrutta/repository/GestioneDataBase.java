@@ -16,32 +16,29 @@ import it.scalesse.ortofrutta.model.Utente;
 import it.scalesse.ortofrutta.model.Vendita;
 
 public class GestioneDataBase {
-	
+
 	private Connection connessione;
 
-	public  GestioneDataBase() throws SQLException, ClassNotFoundException
-	{
+	public GestioneDataBase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/nogozio?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
-	    this.connessione = DriverManager.getConnection(url, "root", "Giuseppe");
-	}
-	
-	public void close() throws SQLException 
-	{
-		this.connessione.close();
-		
+		String url = "jdbc:mysql://localhost:3306/negozio?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
+		this.connessione = DriverManager.getConnection(url, "root", "password");
 	}
 
-	public  String accessoUtente(Utente u) throws ClassNotFoundException, SQLException {
+	public void close() throws SQLException {
+		this.connessione.close();
+
+	}
+
+	public String accessoUtente(Utente u) throws ClassNotFoundException, SQLException {
 
 		String query = "select * from utente where idUtente=? and pass=?;";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setInt(1, u.getIdUtente());
 		statement.setString(2, u.getPass());
 		ResultSet risultato = statement.executeQuery();
-		while (risultato.next()) 
-		{
-			
+		while (risultato.next()) {
+
 			return risultato.getString(5);
 
 		}
@@ -50,7 +47,7 @@ public class GestioneDataBase {
 
 	}
 
-	public  boolean controlloProdotto(Prodotto p) throws ClassNotFoundException, SQLException {
+	public boolean controlloProdotto(Prodotto p) throws ClassNotFoundException, SQLException {
 
 		String query = "select * from prodotti where nome=?;";
 		PreparedStatement statement = connessione.prepareStatement(query);
@@ -65,7 +62,7 @@ public class GestioneDataBase {
 
 	}
 
-	public  boolean aggiungiProdotto(Prodotto p) throws ClassNotFoundException, SQLException {
+	public boolean aggiungiProdotto(Prodotto p) throws ClassNotFoundException, SQLException {
 		int qtaVecchia = 0;
 		if (controlloProdotto(p)) {
 			String query = "select * from prodotti where nome=?;";
@@ -78,7 +75,7 @@ public class GestioneDataBase {
 			}
 			String query2 = "update prodotti set qta=? where nome=?;";
 			statement = connessione.prepareStatement(query2);
-			statement.setInt(1, (p.getQta() + qtaVecchia));
+			statement.setInt(1, p.getQta() + qtaVecchia);
 			statement.setString(2, p.getNome());
 			statement.execute();
 			return true;
@@ -97,7 +94,7 @@ public class GestioneDataBase {
 
 	}
 
-	public  boolean rimuoviProdotto(int idProdotto) throws ClassNotFoundException, SQLException {
+	public boolean rimuoviProdotto(int idProdotto) throws ClassNotFoundException, SQLException {
 		String query = "delete from prodotti where idProdotto= ?;";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setInt(1, idProdotto);
@@ -122,7 +119,6 @@ public class GestioneDataBase {
 
 	public boolean aggiornaProdotto(Prodotto p) throws SQLException, ClassNotFoundException {
 
-
 		String query = "update prodotti set nome=?,qta=?, prezzo=?, descrizione=? where idProdotto=?;";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setString(1, p.getNome());
@@ -141,7 +137,8 @@ public class GestioneDataBase {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			lista.add(new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3),risultato.getString(4)));
+			lista.add(
+					new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3), risultato.getString(4)));
 
 		}
 		return lista;
@@ -156,14 +153,14 @@ public class GestioneDataBase {
 		statement.execute();
 		String query3 = "update prodotti set qta=? where idProdotto=?;";
 		PreparedStatement statement3 = connessione.prepareStatement(query3);
-		statement3.setInt(1, (controlloQta(v) - v.getQtaVenduta()));
+		statement3.setInt(1, controlloQta(v) - v.getQtaVenduta());
 		statement3.setInt(2, v.getIdProdotti());
 		statement3.execute();
 		return true;
 
 	}
 
-	public  int controlloQta(Vendita v) throws ClassNotFoundException, SQLException {
+	public int controlloQta(Vendita v) throws ClassNotFoundException, SQLException {
 		int qtaVecchia = 0;
 		String query2 = "select * from prodotti where idProdotto=?;";
 		PreparedStatement statement2 = connessione.prepareStatement(query2);
@@ -181,7 +178,7 @@ public class GestioneDataBase {
 
 	}
 
-	public  int creaScontrino(int idUtente) throws ClassNotFoundException, SQLException {
+	public int creaScontrino(int idUtente) throws ClassNotFoundException, SQLException {
 		String query = "INSERT INTO scontrino (idScontrino,utente,data) VALUES (?,?,?);";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		int idScontrino = (int) (Math.random() * 100) + idUtente;
@@ -196,8 +193,7 @@ public class GestioneDataBase {
 
 	}
 
-	public  boolean impostaCostoScontrino(int idScontrino, double costo)
-			throws ClassNotFoundException, SQLException {
+	public boolean impostaCostoScontrino(int idScontrino, double costo) throws ClassNotFoundException, SQLException {
 		String query = "update scontrino set costo=? where idScontrino=?;";
 		PreparedStatement statement = connessione.prepareStatement(query);
 		statement.setDouble(1, costo);
@@ -216,7 +212,7 @@ public class GestioneDataBase {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			costo = costo + (risultato.getInt(3) * risultato.getDouble(4));
+			costo = costo + risultato.getInt(3) * risultato.getDouble(4);
 
 		}
 		return costo;
@@ -259,13 +255,13 @@ public class GestioneDataBase {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			return new Prodotto(risultato.getInt(1), risultato.getString(2), risultato.getInt(3),
-					risultato.getInt(4), risultato.getString(5));
-		}		
+			return new Prodotto(risultato.getInt(1), risultato.getString(2), risultato.getInt(3), risultato.getInt(4),
+					risultato.getString(5));
+		}
 
 		return null;
 	}
-    
+
 	public List<Vendita> stampaDettagliScontrini(int idScontrino) throws ClassNotFoundException, SQLException {
 		List<Vendita> lista = new ArrayList<>();
 		String query = "SELECT vendite.*,prodotti.nome FROM vendite inner join prodotti on vendite.idProdotto=prodotti.idProdotto where idScontrino=?;";
@@ -274,10 +270,32 @@ public class GestioneDataBase {
 		ResultSet risultato = statement.executeQuery();
 		while (risultato.next()) {
 
-			lista.add(new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3),risultato.getString(4)));
+			lista.add(
+					new Vendita(risultato.getInt(1), risultato.getInt(2), risultato.getInt(3), risultato.getString(4)));
 
 		}
 		return lista;
 	}
 
+	public boolean aggiungiUtente(Utente utente) throws ClassNotFoundException, SQLException {
+		String query = "insert into utente (nome, pass, eta, tipo) values (?,?,?,?);";
+		PreparedStatement statement = connessione.prepareStatement(query);
+		statement.setString(1, utente.getNome());
+		statement.setString(2, utente.getPass());
+		statement.setInt(3, utente.getEta());
+		statement.setString(4, utente.getTipo());
+		statement.execute();
+		return true;
+	}
+
+	public boolean controllaUtente(Utente utente) throws ClassNotFoundException, SQLException {
+		String query = "select * from utente where nome=?;";
+		PreparedStatement statement = connessione.prepareStatement(query);
+		statement.setString(1, utente.getNome());
+		ResultSet risultato = statement.executeQuery();
+		while (risultato.next()) {
+			return true;
+		}
+		return false;
+	}
 }
