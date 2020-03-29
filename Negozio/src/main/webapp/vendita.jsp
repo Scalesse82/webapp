@@ -1,3 +1,4 @@
+<%@page import="it.scalesse.ortofrutta.model.Vendita"%>
 <%@page import="it.scalesse.ortofrutta.model.Prodotto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -27,6 +28,7 @@ table, th, td {
 	<% }%>
 
 
+<% List<Vendita> carrello=(List<Vendita>) request.getAttribute("carrello"); %>
 
 <% List<Prodotto> lista=(List<Prodotto>) request.getAttribute("listaProdotti"); %>
 <table>
@@ -70,8 +72,7 @@ table, th, td {
   <button type="submit" class="btn btn-success" name="azione" value = "1" >aggiungi</button>
   <button type="submit" class="btn btn-danger" name="azione" value = "2" >paga</button>
   <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
-  
-
+  <input type="hidden" id="carrello" name="carrello" value=<%=carrello%>>
 </form>
 <br>
 <form action="controllerAzione" method="post">

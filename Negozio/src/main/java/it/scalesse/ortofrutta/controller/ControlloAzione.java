@@ -2,6 +2,7 @@ package it.scalesse.ortofrutta.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -50,6 +51,9 @@ public class ControlloAzione extends HttpServlet {
 				req.setAttribute("idUtente", id);
 				req.setAttribute("costo", gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
 				gest.close();
+				List<Vendita> carrello =new ArrayList<>();
+				req.setAttribute("carrello", carrello);
+
 				req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 				break;
 			case 4:

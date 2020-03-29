@@ -31,6 +31,10 @@
 <input type="hidden" id="idUtente" name="idUtente" value=<%=idUtente%>>
 
 </form>
+<br>
+<form action="home.jsp">
+  <button type="submit" class="btn btn-primary" >Log Out</button>  
+  </form>
 <% } %>
 
 

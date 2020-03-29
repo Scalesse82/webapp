@@ -35,9 +35,9 @@ public class CreaUtente extends HttpServlet {
 					gest.close();
 					req.getRequestDispatcher("home.jsp").forward(req, resp);
 				} else {
-					req.setAttribute("messaggio", "utente già esistente");
+					req.setAttribute("risultato", "utente già esistente");
 					gest.close();
-					req.getRequestDispatcher("azioniInterno.jsp").forward(req, resp);
+					req.getRequestDispatcher("risultato.jsp").forward(req, resp);
 				}
 			} else {
 				gest.aggiungiUtente(utente);
@@ -47,7 +47,9 @@ public class CreaUtente extends HttpServlet {
 					req.getRequestDispatcher("home.jsp").forward(req, resp);
 				} else {
 					gest.close();
-					req.getRequestDispatcher("azioniInterno.jsp").forward(req, resp);
+					req.setAttribute("risultato", "utente aggiunto");
+
+					req.getRequestDispatcher("risultato.jsp").forward(req, resp);
 				}
 			}
 		} catch (ClassNotFoundException | SQLException e) {

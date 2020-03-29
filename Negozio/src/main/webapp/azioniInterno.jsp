@@ -26,9 +26,14 @@
 <button type="submit" class="btn btn-primary" name="azione" value = "1" >rimuovi prodotto</button><br><br>
 <button type="submit" class="btn btn-primary" name="azione" value = "2" >modifica prodotto</button><br><br>
 <button type="submit" class="btn btn-primary" name="azione" value = "4" >Stampa vendite</button><br><br>
-<input type="hidden" id="tipo" name="tipo" value="cliente">
+<input type="hidden" id="tipo" name="tipo" value="interno">
 <button type="submit" class="btn btn-primary" name="azione" value = "6" >Aggiungi utente</button>
 </form>
+
+<br>
+<form action="home.jsp">
+  <button type="submit" class="btn btn-primary" >Log Out</button>  
+  </form>
 
 <% } %>
 

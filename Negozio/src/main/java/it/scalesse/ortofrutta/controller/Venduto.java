@@ -16,7 +16,7 @@ import it.scalesse.ortofrutta.repository.GestioneDataBase;
 
 public class Venduto extends HttpServlet
 {  
-	List<Vendita> carrello;
+	
 
 	
 	
@@ -31,10 +31,8 @@ public class Venduto extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		if(carrello==null)
-		{
-			carrello=new ArrayList<>();
-		}
+		List<Vendita> carrello = ((List<Vendita>)req.getAttribute("carrello"));
+		
 		int idUtente=Integer.parseInt(req.getParameter("idUtente"));
 
 		int azione = Integer.parseInt(req.getParameter("azione"));
@@ -51,8 +49,9 @@ public class Venduto extends HttpServlet
 			   carrello.add(new Vendita(idProdotto, qtaVenduta));
 			   req.setAttribute("messaggio", "aggiunto al carrello");
 	           req.setAttribute("idUtente",idUtente);
-			   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti()));
+			   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti(),carrello));
 			   req.setAttribute("costo", gest.sommaScontrini(idUtente));
+			   req.setAttribute("carrello", carrello);
 			   gest.close();
 			   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 			   }
@@ -60,8 +59,9 @@ public class Venduto extends HttpServlet
 			   {
 				   req.setAttribute("messaggio", "quantità insufficente");
 				   req.setAttribute("idUtente",idUtente);
-				   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti()));
+				   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti(),carrello));
 				   req.setAttribute("costo", gest.sommaScontrini(idUtente));
+				   req.setAttribute("carrello", carrello);
 				   gest.close();
 				   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 
@@ -71,6 +71,13 @@ public class Venduto extends HttpServlet
 			}
 			else if(2==azione)
 			{
+				 if(req.getParameter("idProdotto")!=null)
+				   {  int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
+				   int qtaVenduta=Integer.parseInt(req.getParameter("qtaVenduta"));
+				   if(gest.controlloQta(new Vendita(idProdotto, qtaVenduta))>0)
+				     
+				   carrello.add(new Vendita(idProdotto, qtaVenduta));
+				   }
 			
 			int idScontrino=gest.creaScontrino(idUtente);
             for (Vendita v : carrello) 
@@ -94,7 +101,7 @@ public class Venduto extends HttpServlet
 			}
 		}
 	
-	 public List<Prodotto> aggiornaLista(List<Prodotto> lista)
+	 public List<Prodotto> aggiornaLista(List<Prodotto> lista,List<Vendita> carrello)
 	 { 
 		 for (Vendita v : carrello) 
 		 {

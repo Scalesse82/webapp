@@ -22,7 +22,7 @@ public class GestioneDataBase {
 	public GestioneDataBase() throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/negozio?useUnicode=true&useLegacyDatetimeCode=false&serverTimezone=UTC&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&useSSL=false";
-		this.connessione = DriverManager.getConnection(url, "root", "password");
+		this.connessione = DriverManager.getConnection(url, "root", "Giuseppe");
 	}
 
 	public void close() throws SQLException {
