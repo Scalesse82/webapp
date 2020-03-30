@@ -64,7 +64,8 @@ public class GestioneDataBase {
 
 	public boolean aggiungiProdotto(Prodotto p) throws ClassNotFoundException, SQLException {
 		int qtaVecchia = 0;
-		if (controlloProdotto(p)) {
+		if (controlloProdotto(p)) 
+		    {
 			String query = "select * from prodotti where nome=?;";
 			PreparedStatement statement = connessione.prepareStatement(query);
 			statement.setString(1, p.getNome());

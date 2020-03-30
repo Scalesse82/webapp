@@ -3,6 +3,8 @@ package it.scalesse.ortofrutta.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import it.scalesse.ortofrutta.model.Prodotto;
+import it.scalesse.ortofrutta.model.Scontrino;
 import it.scalesse.ortofrutta.model.Vendita;
 import it.scalesse.ortofrutta.repository.GestioneDataBase;
 
@@ -50,21 +53,21 @@ public class ControlloAzione extends HttpServlet {
 				req.setAttribute("listaProdotti", lista);
 				req.setAttribute("idUtente", id);
 				req.setAttribute("costo", gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				int idScontrino=gest.creaScontrino(id);
 				gest.close();
-				List<Vendita> carrello =new ArrayList<>();
-				req.setAttribute("carrello", carrello);
+				
+				req.setAttribute("idScontrino", idScontrino);
 
 				req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 				break;
 			case 4:
 				List<Vendita> listaVendite = gest.stampaVendite();
-				req.setAttribute("listaVendite", listaVendite);
+				req.setAttribute("listaVendite", ordinaVendite(listaVendite));
 				gest.close();
 				req.getRequestDispatcher("stmVendite.jsp").forward(req, resp);
 				break;
 			case 5:
-				req.setAttribute("listaScontrini",
-						gest.stampaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
+				req.setAttribute("listaScontrini",ordinaScontrini(gest.stampaScontrini(Integer.parseInt(req.getParameter("idUtente")))));
 				req.setAttribute("idUtente", Integer.parseInt(req.getParameter("idUtente")));
 				req.setAttribute("costo", gest.sommaScontrini(Integer.parseInt(req.getParameter("idUtente"))));
 				gest.close();
@@ -87,6 +90,48 @@ public class ControlloAzione extends HttpServlet {
 			e.printStackTrace();
 		}
 
+	}
+	public List<Scontrino> ordinaScontrini(List<Scontrino> lista)
+	{
+		
+		Collections.sort(lista, new Comparator<Scontrino>() {
+			
+			@Override
+			public int compare(Scontrino o1, Scontrino o2)
+			{
+			   return o1.getData().compareTo(o2.getData());
+			}
+			
+			});
+		
+		
+		return lista;		
+		
+	}
+	public List<Vendita> ordinaVendite(List<Vendita> lista)
+	{
+		
+		Collections.sort(lista, new Comparator<Vendita>() {
+			
+			@Override
+			public int compare(Vendita o1, Vendita o2)
+			{
+				if(o1.getIdScontrino() < o2.getIdScontrino())
+					return -1;
+				
+				if (o1.getIdScontrino()>o2.getIdScontrino()) 
+					
+					return 1;
+				
+				
+				return 0;
+			}
+			
+			});
+		
+		
+		return lista;		
+		
 	}
 
 }

@@ -72,7 +72,7 @@ table, th, td {
   <button type="submit" class="btn btn-success" name="azione" value = "1" >aggiungi</button>
   <button type="submit" class="btn btn-danger" name="azione" value = "2" >paga</button>
   <input type="hidden" id="idUtente" name="idUtente" value=<%=(int)request.getAttribute("idUtente")%>>
-  <input type="hidden" id="carrello" name="carrello" value=<%=carrello%>>
+  <input type="hidden" id="idScontrino" name="idScontrino" value=<%=(int)request.getAttribute("idScontrino")%>>
 </form>
 <br>
 <form action="controllerAzione" method="post">

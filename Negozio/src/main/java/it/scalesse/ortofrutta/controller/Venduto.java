@@ -31,11 +31,12 @@ public class Venduto extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
 	{
-		List<Vendita> carrello = ((List<Vendita>)req.getAttribute("carrello"));
 		
 		int idUtente=Integer.parseInt(req.getParameter("idUtente"));
-
+        int idScontrino=Integer.parseInt(req.getParameter("idScontrino"));
 		int azione = Integer.parseInt(req.getParameter("azione"));
+		   System.out.println(" "+idScontrino);
+
 		try {
 			GestioneDataBase gest = new GestioneDataBase();
 
@@ -45,23 +46,24 @@ public class Venduto extends HttpServlet
 			   int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
 			   int qtaVenduta=Integer.parseInt(req.getParameter("qtaVenduta"));
 			   if(gest.controlloQta(new Vendita(idProdotto, qtaVenduta))>0)
-			   {   
-			   carrello.add(new Vendita(idProdotto, qtaVenduta));
-			   req.setAttribute("messaggio", "aggiunto al carrello");
-	           req.setAttribute("idUtente",idUtente);
-			   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti(),carrello));
-			   req.setAttribute("costo", gest.sommaScontrini(idUtente));
-			   req.setAttribute("carrello", carrello);
-			   gest.close();
-			   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
+			   {  
+			     gest.aggiungiVendita(new Vendita(idScontrino, idProdotto,qtaVenduta));
+			     
+			     req.setAttribute("messaggio", "aggiunto al carrello");
+	             req.setAttribute("idUtente",idUtente);
+	             req.setAttribute("idScontrino",idScontrino);
+			     req.setAttribute("listaProdotti", gest.stampaProdotti());
+			     req.setAttribute("costo", gest.sommaScontrini(idUtente));
+			     gest.close();
+			     req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 			   }
 			   else
 			   {
 				   req.setAttribute("messaggio", "quantità insufficente");
 				   req.setAttribute("idUtente",idUtente);
-				   req.setAttribute("listaProdotti", aggiornaLista(gest.stampaProdotti(),carrello));
+		           req.setAttribute("idScontrino",idScontrino);
+				   req.setAttribute("listaProdotti", gest.stampaProdotti());
 				   req.setAttribute("costo", gest.sommaScontrini(idUtente));
-				   req.setAttribute("carrello", carrello);
 				   gest.close();
 				   req.getRequestDispatcher("vendita.jsp").forward(req, resp);
 
@@ -72,22 +74,18 @@ public class Venduto extends HttpServlet
 			else if(2==azione)
 			{
 				 if(req.getParameter("idProdotto")!=null)
-				   {  int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
+				   {  
+					 
+				   int idProdotto=Integer.parseInt(req.getParameter("idProdotto"));
 				   int qtaVenduta=Integer.parseInt(req.getParameter("qtaVenduta"));
 				   if(gest.controlloQta(new Vendita(idProdotto, qtaVenduta))>0)
-				     
-				   carrello.add(new Vendita(idProdotto, qtaVenduta));
+				      {
+					   gest.aggiungiVendita(new Vendita(idScontrino, idProdotto,qtaVenduta));
+				      }
+
 				   }
-			
-			int idScontrino=gest.creaScontrino(idUtente);
-            for (Vendita v : carrello) 
-            {
-            	gest.aggiungiVendita(new Vendita(idScontrino, v.getIdProdotti(), v.getQtaVenduta()));
-            	
-			}
             
             gest.impostaCostoScontrino(idScontrino, gest.importoScontrino(idScontrino));
-            carrello.clear();	
             req.setAttribute("idUtente",idUtente);
 			req.setAttribute("costo", gest.sommaScontrini(idUtente));
 			gest.close();
@@ -101,23 +99,7 @@ public class Venduto extends HttpServlet
 			}
 		}
 	
-	 public List<Prodotto> aggiornaLista(List<Prodotto> lista,List<Vendita> carrello)
-	 { 
-		 for (Vendita v : carrello) 
-		 {
-			 for (int i=0;i<lista.size();i++) 
-			 {
-				if(v.getIdProdotti()==lista.get(i).getIdProdotto())
-				{
-			         lista.get(i).setQta(lista.get(i).getQta()-v.getQtaVenduta());
-					
-				}
-			 }
-			
-		 }
-		 return lista;		 
-		 
-	 }
+	
 	
 	
 	}
